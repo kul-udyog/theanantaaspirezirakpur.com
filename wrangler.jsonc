@@ -1,0 +1,14 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "theanantaaspirezirakpur",
+  "compatibility_date": "2026-07-28",
+  "observability": {
+    "enabled": true
+  },
+  "assets": {
+    "directory": "ananta-aspire-site"
+  },
+  "compatibility_flags": [
+    "nodejs_compat"
+  ]
+}
