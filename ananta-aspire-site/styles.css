@@ -1,0 +1,173 @@
+/* ===== Base ===== */
+* { scroll-behavior: smooth; }
+body { font-feature-settings: "ss01"; }
+.font-mono-data { letter-spacing: 0.02em; }
+
+a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible {
+  outline: 2px solid #C9A34E;
+  outline-offset: 2px;
+}
+
+/* ===== Eyebrow labels ===== */
+.eyebrow, .eyebrow-light {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  font-size: 0.75rem;
+  font-weight: 600;
+  margin-bottom: 0.75rem;
+  color: #C9A34E;
+}
+.eyebrow-light { color: #8C6A3F; }
+.eyebrow::before, .eyebrow-light::before {
+  content: "";
+  width: 1.5rem;
+  height: 1px;
+  background: currentColor;
+  opacity: 0.6;
+}
+
+/* ===== Header ===== */
+#siteHeader { background: transparent; }
+#siteHeader.scrolled {
+  background: rgba(17,15,12,0.92);
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid rgba(201,163,78,0.15);
+}
+.star-mark { color: #C9A34E; }
+
+/* ===== Hero crossfade carousel ===== */
+.hero-slide {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  opacity: 0;
+  transition: opacity 1.6s ease;
+}
+.hero-slide.active { opacity: 1; }
+.hero-dot {
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  background: rgba(244,238,225,0.35);
+  display: inline-block;
+  cursor: pointer;
+  transition: background 0.3s ease, transform 0.3s ease;
+}
+.hero-dot.active {
+  background: #C9A34E;
+  transform: scale(1.3);
+}
+
+/* ===== Section divider (signature motif) ===== */
+.section-divider {
+  display: flex;
+  justify-content: center;
+  padding: 0.5rem 0;
+}
+
+/* ===== Highlight / spec cards ===== */
+.highlight-card {
+  background: rgba(244,238,225,0.03);
+  border: 1px solid rgba(201,163,78,0.15);
+  border-radius: 1.25rem;
+  padding: 1.5rem;
+  transition: border-color 0.25s ease, transform 0.25s ease;
+}
+.highlight-card:hover {
+  border-color: rgba(201,163,78,0.4);
+  transform: translateY(-3px);
+}
+
+/* ===== Floor plan cards (on ivory section) ===== */
+.floorplan-card {
+  background: #ffffff;
+  border-radius: 1.25rem;
+  padding: 1.5rem;
+  border: 1px solid rgba(17,15,12,0.08);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+.floorplan-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 20px 40px -20px rgba(17,15,12,0.25);
+}
+
+/* ===== Gallery ===== */
+.gallery-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 0.75rem;
+  filter: saturate(1.02);
+  transition: transform 0.4s ease, filter 0.4s ease;
+  cursor: zoom-in;
+}
+.gallery-img:hover {
+  transform: scale(1.03);
+  filter: saturate(1.1) brightness(1.03);
+}
+
+/* ===== Amenity items ===== */
+.amenity-item {
+  position: relative;
+  padding-left: 1.25rem;
+  border-left: 2px solid rgba(201,163,78,0.5);
+}
+
+/* ===== FAQ accordion (dark) ===== */
+.faq-item {
+  background: rgba(244,238,225,0.03);
+  border: 1px solid rgba(201,163,78,0.15);
+  border-radius: 1rem;
+  overflow: hidden;
+}
+.faq-question {
+  width: 100%;
+  text-align: left;
+  padding: 1.1rem 1.25rem;
+  font-weight: 600;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  cursor: pointer;
+  background: none;
+  border: none;
+  font-size: 0.95rem;
+  color: #F4EEE1;
+}
+.faq-icon { flex-shrink: 0; transition: transform 0.25s ease; color: #C9A34E; }
+.faq-item.open .faq-icon { transform: rotate(45deg); }
+.faq-answer {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s ease, padding 0.3s ease;
+  padding: 0 1.25rem;
+  font-size: 0.9rem;
+  color: rgba(244,238,225,0.65);
+  line-height: 1.6;
+}
+.faq-item.open .faq-answer { max-height: 400px; padding: 0 1.25rem 1.1rem; }
+
+/* ===== Scroll reveal ===== */
+.reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+}
+.reveal.in-view {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  * { scroll-behavior: auto !important; transition: none !important; }
+  .reveal { opacity: 1 !important; transform: none !important; }
+  .hero-slide { transition: none !important; }
+}
+
+/* Modal / Lightbox */
+#leadModal.flex, #imgLightbox.flex { display: flex; }

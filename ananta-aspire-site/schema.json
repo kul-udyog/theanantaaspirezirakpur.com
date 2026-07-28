@@ -1,0 +1,42 @@
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "name": "The Ananta Aspire Sales Desk",
+      "url": "https://theanantaaspirezirakpur.com/",
+      "telephone": "+91-7696291827"
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://theanantaaspirezirakpur.com/" }
+      ]
+    },
+    {
+      "@type": "WebSite",
+      "url": "https://theanantaaspirezirakpur.com/",
+      "name": "The Ananta Aspire Zirakpur"
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Is The Ananta Aspire RERA registered?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Yes. The project is registered under Punjab RERA with the number PBRERA-SAS79-PR0777." }
+        },
+        {
+          "@type": "Question",
+          "name": "Where exactly is Ananta Aspire located?",
+          "acceptedAnswer": { "@type": "Answer", "text": "It sits directly on NH-7, the Chandigarh-Patiala Highway, in Zirakpur, Punjab 140603." }
+        },
+        {
+          "@type": "Question",
+          "name": "What configurations are available?",
+          "acceptedAnswer": { "@type": "Answer", "text": "3 BHK, 3 BHK + Study/Attendant Room, and 4 BHK + Study/Attendant Room, with two apartments on each floor." }
+        }
+      ]
+    }
+  ]
+}
