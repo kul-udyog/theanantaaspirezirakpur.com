@@ -279,11 +279,12 @@
 
 <!-- Header -->
 <header id="siteHeader" class="fixed top-0 left-0 right-0 z-30 transition-colors duration-300">
-  <div class="max-w-7xl mx-auto px-5 md:px-10 h-16 md:h-20 flex items-center justify-between gap-4">
-    <a href="#top" class="flex items-center gap-2.5 shrink-0">
+  <div class="max-w-7xl mx-auto px-5 md:px-10 h-16 md:h-20 flex items-center justify-between gap-4 relative">
+    <a href="#top" class="flex items-center gap-2.5 shrink-0 relative z-10">
       <img src="images/logo-footer.png" alt="The Ananta Aspire - Elevating Lifestyle" class="h-10 sm:h-12 md:h-14 w-auto">
-      <span class="font-display font-semibold text-xs sm:text-sm lg:text-base xl:text-lg leading-tight text-ivory whitespace-nowrap">The Ananta Aspire</span>
+      <span class="hidden lg:inline font-display font-semibold text-base xl:text-lg leading-tight text-ivory whitespace-nowrap">The Ananta Aspire</span>
     </a>
+    <span class="lg:hidden absolute inset-x-0 text-center font-display font-bold text-xl sm:text-2xl text-ivory pointer-events-none px-16">The Ananta Aspire</span>
     <nav class="hidden lg:flex items-center gap-5 xl:gap-7 text-xs xl:text-sm font-medium tracking-wide uppercase text-ivory/80 flex-1 justify-center">
       <a href="#overview" class="hover:text-gold transition whitespace-nowrap">Overview</a>
       <a href="#gallery" class="hover:text-gold transition whitespace-nowrap">Gallery</a>
