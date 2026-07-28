@@ -51,16 +51,26 @@ function buildFaq() {
 }
 
 // ===== Modal handling =====
+let modalOpenedViaHistory = false;
+
 function openModal(source) {
   const modal = document.getElementById("leadModal");
   modal.classList.remove("hidden");
   modal.classList.add("flex");
   modal.dataset.source = source || "Unknown";
+  history.pushState({ ananteModal: true }, "");
+  modalOpenedViaHistory = true;
 }
-function closeModal() {
+function closeModal(fromPopState) {
   const modal = document.getElementById("leadModal");
   modal.classList.add("hidden");
   modal.classList.remove("flex");
+  if (!fromPopState && modalOpenedViaHistory) {
+    modalOpenedViaHistory = false;
+    history.back();
+  } else {
+    modalOpenedViaHistory = false;
+  }
 }
 
 // ===== Phone helpers =====
@@ -76,9 +86,11 @@ function isValidPhone(digits) {
 
 // ===== Lead submission =====
 async function submitLead(data, statusEl) {
-  statusEl.textContent = "Sending...";
   try {
-    await fetch(LEAD_ENDPOINT, {
+    // Fire-and-forget: no-cors mode gives an opaque response we can't read anyway,
+    // so we don't wait on it — this makes the form feel instant instead of waiting
+    // on the Apps Script backend (which can take a few seconds to spin up).
+    fetch(LEAD_ENDPOINT, {
       method: "POST",
       mode: "no-cors",
       headers: { "Content-Type": "text/plain" },
@@ -91,7 +103,7 @@ async function submitLead(data, statusEl) {
         page: window.location.href,
         timestamp: new Date().toISOString()
       })
-    });
+    }).catch(() => {});
     statusEl.textContent = "";
     return true;
   } catch (err) {
@@ -196,10 +208,18 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
   document.querySelectorAll(".js-close-modal").forEach(btn => {
-    btn.addEventListener("click", closeModal);
+    btn.addEventListener("click", () => closeModal(false));
   });
   document.getElementById("leadModal").addEventListener("click", (e) => {
-    if (e.target.id === "leadModal") closeModal();
+    if (e.target.id === "leadModal") closeModal(false);
+  });
+
+  // Back button closes the modal instead of navigating away from the page
+  window.addEventListener("popstate", () => {
+    const modal = document.getElementById("leadModal");
+    if (modal && modal.classList.contains("flex")) {
+      closeModal(true);
+    }
   });
 
   // Modal form submit
