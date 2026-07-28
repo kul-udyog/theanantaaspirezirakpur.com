@@ -23,28 +23,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
-<script src="https://cdn.tailwindcss.com"></script>
-<script>
-  tailwind.config = {
-    theme: {
-      extend: {
-        colors: {
-          onyx: '#110F0C',
-          charcoal: '#1C1914',
-          ivory: '#F4EEE1',
-          gold: '#C9A34E',
-          brass: '#8C6A3F',
-          clay: '#B4592F'
-        },
-        fontFamily: {
-          display: ['Fraunces', 'serif'],
-          body: ['Inter', 'sans-serif'],
-          'mono-data': ['"Space Mono"', 'monospace']
-        }
-      }
-    }
-  }
-</script>
+<link rel="stylesheet" href="tailwind.css">
 <link rel="stylesheet" href="styles.css">
 <script type="application/ld+json">
 {
@@ -242,6 +221,48 @@
   ]
 }
 </script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Product",
+  "name": "The Ananta Aspire",
+  "review": [
+    {
+      "@type": "Review",
+      "author": { "@type": "Person", "name": "Sahil Chaudhary" },
+      "reviewBody": "We booked a flat in this project 2 years back and the overall experience is great. Everytime, we visit chandigarh, we take a tour of project update. Team was very helpful and take us on tour for construction update.",
+      "publisher": { "@type": "Organization", "name": "Google" }
+    },
+    {
+      "@type": "Review",
+      "author": { "@type": "Person", "name": "Munish Sharma" },
+      "reviewBody": "Ananta Aspire is a thoughtfully crafted township designed to offer residents a perfect blend of modern innovation and everyday comfort. Must visit if you are exploring top class living options near Chandigarh.",
+      "publisher": { "@type": "Organization", "name": "Google" }
+    },
+    {
+      "@type": "Review",
+      "author": { "@type": "Person", "name": "Vicky Thusamd" },
+      "reviewBody": "Impressed with the construction quality and attention to every minute detail which set them apart from other builders. Must recommended project in tricity.",
+      "publisher": { "@type": "Organization", "name": "Google" }
+    },
+    {
+      "@type": "Review",
+      "author": { "@type": "Person", "name": "Puneet Deol" },
+      "reviewBody": "Amazing property, their 4+1 is very spacious and being both side open its fully ventilated and full of light, the staff is very polite and helpful.",
+      "publisher": { "@type": "Organization", "name": "Google" }
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://theanantaaspirezirakpur.com/" }
+  ]
+}
+</script>
 </head>
 <body class="bg-onyx text-ivory font-body">
 
@@ -307,7 +328,7 @@
     <p class="uppercase tracking-[0.25em] text-gold text-xs md:text-sm font-semibold mb-5 flex items-center gap-3">
       <span class="w-8 h-px bg-gold/60"></span>NH-7 · Chandigarh-Patiala Highway · Zirakpur
     </p>
-    <h1 class="font-display text-4xl md:text-6xl lg:text-7xl leading-[1.05] text-ivory mb-6 max-w-3xl">A resort address, <span class="italic text-gold">two homes</span> to a floor.</h1>
+    <h1 class="font-display text-4xl md:text-6xl lg:text-7xl leading-[1.05] text-ivory mb-6 max-w-3xl">A resort address in Zirakpur, <span class="italic text-gold">two homes</span> to a floor.</h1>
     <p class="text-base md:text-lg text-ivory/75 max-w-xl mb-10 leading-relaxed">The Ananta Aspire — Mivan-built 3, 3+1 and 4+1 BHK smart apartments across 34,050 sq. yd., with a resort-style clubhouse, 15 minutes from Chandigarh Airport.</p>
     <div class="flex flex-wrap gap-4 mb-14">
       <button class="js-open-modal bg-gold text-onyx font-bold px-7 py-3.5 rounded-full hover:bg-ivory transition" data-source="Hero - Schedule Visit">Schedule a Visit</button>
@@ -414,16 +435,17 @@
   <h2 class="font-display text-3xl md:text-4xl mb-4 text-center text-ivory">A closer look</h2>
   <p class="text-center text-ivory/60 max-w-2xl mx-auto mb-12">A closer look at the interiors, clubhouse, facade and pool deck.</p>
   <div class="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4">
-    <img src="images/gallery/interior-bedroom.jpg" alt="Bedroom interior" loading="lazy" class="gallery-img aspect-square js-lightbox">
-    <img src="images/gallery/clubhouse-lounge.jpg" alt="Clubhouse lounge at dusk" loading="lazy" class="gallery-img aspect-square js-lightbox">
-    <img src="images/gallery/pool-daytime.jpg" alt="Pool deck by day" loading="lazy" class="gallery-img aspect-square js-lightbox">
-    <img src="images/gallery/facade-detail.jpg" alt="Facade jaali detail" loading="lazy" class="gallery-img aspect-square js-lightbox">
-    <img src="images/gallery/clubhouse-amenity.jpg" alt="Clubhouse and sports court" loading="lazy" class="gallery-img aspect-square js-lightbox">
-    <img src="images/gallery/leisure-space.jpg" alt="Leisure and recreation space" loading="lazy" class="gallery-img aspect-square js-lightbox">
-    <img src="images/gallery/kids-play-area.jpg" alt="Kids play area" loading="lazy" class="gallery-img aspect-square js-lightbox">
-    <img src="images/gallery/street-view.jpg" alt="Internal street and tower view" loading="lazy" class="gallery-img aspect-square js-lightbox">
-    <img src="images/gallery/entrance-gate.jpg" alt="Project entrance gate" loading="lazy" class="gallery-img col-span-2 aspect-[2/1] md:aspect-square js-lightbox">
-    <img src="images/gallery/aerial-view.jpg" alt="Aerial view of the project" loading="lazy" class="gallery-img col-span-2 aspect-[2/1] md:aspect-square js-lightbox">
+    <img src="images/gallery/interior-living-room.jpg" alt="The Ananta Aspire Zirakpur 3 BHK living room interior" loading="lazy" class="gallery-img col-span-2 md:row-span-2 aspect-square md:aspect-auto md:h-full js-lightbox">
+    <img src="images/gallery/interior-bedroom.jpg" alt="The Ananta Aspire Zirakpur bedroom interior" loading="lazy" class="gallery-img aspect-square js-lightbox">
+    <img src="images/gallery/clubhouse-lounge.jpg" alt="The Ananta Aspire Zirakpur clubhouse lounge at dusk" loading="lazy" class="gallery-img aspect-square js-lightbox">
+    <img src="images/gallery/pool-daytime.jpg" alt="The Ananta Aspire Zirakpur rooftop pool deck" loading="lazy" class="gallery-img aspect-square js-lightbox">
+    <img src="images/gallery/facade-detail.jpg" alt="The Ananta Aspire Zirakpur building facade detail" loading="lazy" class="gallery-img aspect-square js-lightbox">
+    <img src="images/gallery/clubhouse-amenity.jpg" alt="The Ananta Aspire Zirakpur clubhouse and sports court" loading="lazy" class="gallery-img aspect-square js-lightbox">
+    <img src="images/gallery/leisure-space.jpg" alt="The Ananta Aspire Zirakpur leisure and recreation space" loading="lazy" class="gallery-img aspect-square js-lightbox">
+    <img src="images/gallery/kids-play-area.jpg" alt="The Ananta Aspire Zirakpur kids play area" loading="lazy" class="gallery-img aspect-square js-lightbox">
+    <img src="images/gallery/street-view.jpg" alt="The Ananta Aspire Zirakpur internal street and tower view" loading="lazy" class="gallery-img aspect-square js-lightbox">
+    <img src="images/gallery/entrance-gate.jpg" alt="The Ananta Aspire Zirakpur entrance gate" loading="lazy" class="gallery-img col-span-2 aspect-[2/1] md:aspect-square js-lightbox">
+    <img src="images/gallery/aerial-view.jpg" alt="The Ananta Aspire Zirakpur aerial view, NH-7" loading="lazy" class="gallery-img col-span-2 aspect-[2/1] md:aspect-square js-lightbox">
   </div>
 </section>
 
@@ -436,21 +458,21 @@
 
     <div class="grid lg:grid-cols-3 gap-8">
       <div class="floorplan-card">
-        <img src="images/floorplan-3bhk.jpg" alt="The Ananta Aspire 3 BHK typical floor plan" loading="lazy" class="w-full rounded-xl border border-onyx/10 mb-5 js-lightbox">
+        <img src="images/floorplan-3bhk.jpg" alt="The Ananta Aspire Zirakpur 3 BHK typical floor plan" loading="lazy" class="w-full rounded-xl border border-onyx/10 mb-5 js-lightbox">
         <h3 class="font-display text-xl mb-3">3 BHK</h3>
         <table class="w-full text-sm font-mono-data">
           <tr class="border-t border-b border-onyx/10"><td class="py-2 text-onyx/60">Area</td><td class="py-2 text-right font-semibold text-brass">1,843.00 sq.ft.</td></tr>
         </table>
       </div>
       <div class="floorplan-card">
-        <img src="images/floorplan-3bhk-study.jpg" alt="The Ananta Aspire 3 BHK plus Study Attendant Room typical floor plan" loading="lazy" class="w-full rounded-xl border border-onyx/10 mb-5 js-lightbox">
+        <img src="images/floorplan-3bhk-study.jpg" alt="The Ananta Aspire Zirakpur 3 BHK plus Study Attendant Room typical floor plan" loading="lazy" class="w-full rounded-xl border border-onyx/10 mb-5 js-lightbox">
         <h3 class="font-display text-xl mb-3">3 BHK + Study / Attendant Room</h3>
         <table class="w-full text-sm font-mono-data">
           <tr class="border-t border-b border-onyx/10"><td class="py-2 text-onyx/60">Area</td><td class="py-2 text-right font-semibold text-brass">2,247.00 sq.ft.</td></tr>
         </table>
       </div>
       <div class="floorplan-card">
-        <img src="images/floorplan-4bhk-study.jpg" alt="The Ananta Aspire 4 BHK plus Study Attendant Room typical floor plan" loading="lazy" class="w-full rounded-xl border border-onyx/10 mb-5 js-lightbox">
+        <img src="images/floorplan-4bhk-study.jpg" alt="The Ananta Aspire Zirakpur 4 BHK plus Study Attendant Room typical floor plan" loading="lazy" class="w-full rounded-xl border border-onyx/10 mb-5 js-lightbox">
         <h3 class="font-display text-xl mb-3">4 BHK + Study / Attendant Room</h3>
         <table class="w-full text-sm font-mono-data">
           <tr class="border-t border-b border-onyx/10"><td class="py-2 text-onyx/60">Area</td><td class="py-2 text-right font-semibold text-brass">2,945.45 sq.ft.</td></tr>
@@ -469,7 +491,7 @@
   <h2 class="font-display text-3xl md:text-4xl mb-4 text-center text-ivory">Twenty-six landscaped features, one connected site</h2>
   <p class="text-center text-ivory/60 max-w-2xl mx-auto mb-10">A 60' wide entrance leads into a spine of gardens, courts and the clubhouse, with every tower block facing green space.</p>
   <div class="rounded-2xl overflow-hidden border border-gold/15">
-    <img src="images/gallery/interior-living-room.jpg" alt="The Ananta Aspire living room interior" loading="lazy" class="w-full js-lightbox cursor-zoom-in">
+    <img src="images/master-plan.jpg" alt="The Ananta Aspire official master plan layout — Zirakpur" loading="lazy" class="w-full js-lightbox cursor-zoom-in">
   </div>
   <p class="text-center text-ivory/40 text-xs mt-3">Tap the image to view full size</p>
 </section>
@@ -667,7 +689,7 @@
       <p class="mt-4 text-xs text-ivory/30">This is an independent marketing website run by an authorised channel partner and is not affiliated with or an official website of the project developer.</p>
     </div>
   </div>
-  <p class="text-center text-xs text-ivory/30 pb-4">© 2026 The Ananta Aspire Zirakpur. All rights reserved.</p>
+  <p class="text-center text-xs text-ivory/30 pb-4">© 2026 The Ananta Aspire Zirakpur. All rights reserved. · Page last updated July 2026</p>
 </footer>
 
 <!-- Lead Capture Modal -->
