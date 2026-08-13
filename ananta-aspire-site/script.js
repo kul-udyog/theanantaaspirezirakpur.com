@@ -23,7 +23,11 @@ const faqs = [
   { q: "Who is the developer of Ananta Aspire?", a: "The project is developed by M/S Svastiga Infra Private Limited." },
   { q: "Can I get a call back with current pricing?", a: "Yes — pricing changes with inventory and floor, so share your number using the enquiry form and our team will call you back with current rates for your preferred configuration." },
   { q: "What does 'dual core' mean for this project?", a: "It refers to the two-apartment-per-floor layout — every home is open on both sides, facing the landscaped park on one end and the skyline on the other, giving cross-ventilation and daylight through the day." },
-  { q: "What features does the master plan include?", a: "The master plan includes a central plaza, clubhouse, cloud forest, bamboo and zen gardens, a skating rink, cricket pitch, badminton and lawn tennis courts, a party lawn, kids' play areas and a 60-foot wide entrance road." }
+  { q: "What features does the master plan include?", a: "The master plan includes a central plaza, clubhouse, cloud forest, bamboo and zen gardens, a skating rink, cricket pitch, badminton and lawn tennis courts, a party lawn, kids' play areas and a 60-foot wide entrance road." },
+  { q: "What is the possession status of Ananta Aspire?", a: "Several towers at Ananta Aspire are ready to move, with residents already in occupation, while other towers are in final stages of construction — the exact status depends on the tower and floor. Share your number and our team will confirm the current possession status for your preferred configuration." },
+  { q: "Are resale units available at Ananta Aspire?", a: "Yes — resale units become available from time to time as early buyers list their apartments. Resale pricing depends on floor, tower, facing and current demand. Contact us for verified resale options currently available." },
+  { q: "Can I rent an apartment at Ananta Aspire?", a: "Yes, rental units are available from time to time, generally in the range of ₹40,000–₹50,000 per month depending on configuration, floor and furnishing. Contact us for current availability." },
+  { q: "What is the pin code for Ananta Aspire, Zirakpur?", a: "The Ananta Aspire is located on NH-7, Chandigarh-Patiala Highway, Zirakpur, Punjab — PIN code 140603." }
 ];
 
 // ===== Build FAQ accordion =====
