@@ -35,16 +35,58 @@
 </head>
 <body class="bg-onyx text-ivory font-body">
 
-  <!-- Simple header -->
-  <header class="border-b border-gold/10">
-    <div class="max-w-5xl mx-auto px-5 md:px-10 h-16 md:h-20 flex items-center justify-between gap-4">
-      <a href="index.html" class="flex items-center gap-2.5">
-        <img src="images/logo-footer.png" alt="The Ananta Aspire - Elevating Lifestyle" class="h-10 md:h-12 w-auto">
-        <span class="hidden sm:inline font-display font-semibold text-base md:text-lg text-ivory">The Ananta Aspire</span>
-      </a>
-      <a href="index.html#enquiry" class="bg-gold text-onyx text-sm font-bold px-5 py-2.5 rounded-full hover:bg-ivory transition whitespace-nowrap">Get Current Pricing</a>
+<!-- Sticky mobile CTA bar -->
+<div id="stickyBar" class="fixed bottom-0 left-0 right-0 z-40 flex md:hidden">
+  <button class="flex-1 bg-charcoal text-ivory text-center py-3 font-semibold tracking-wide flex items-center justify-center gap-2 border-t border-gold/20 js-open-modal" data-source="Sticky Bar - Call Now">
+    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z"/></svg>
+    Call Now
+  </button>
+  <button class="flex-1 bg-gold text-onyx text-center py-3 font-bold tracking-wide js-open-modal border-t border-gold/20" data-source="Sticky Bar - Enquire">
+    Enquire Now
+  </button>
+</div>
+
+<!-- Header -->
+<header id="siteHeader">
+  <div class="max-w-7xl mx-auto px-5 md:px-10 h-16 md:h-20 flex items-center justify-between gap-4 relative">
+    <a href="index.html" class="flex items-center gap-2.5 shrink-0 relative z-10">
+      <img src="images/logo-footer.png" alt="The Ananta Aspire - Elevating Lifestyle" class="h-10 sm:h-12 md:h-14 w-auto">
+      <span class="hidden lg:inline font-display font-semibold text-base xl:text-lg leading-tight text-ivory whitespace-nowrap">The Ananta Aspire</span>
+    </a>
+    <span class="lg:hidden absolute inset-x-0 text-center font-display font-bold text-xl sm:text-2xl text-ivory pointer-events-none px-16">The Ananta Aspire</span>
+    <nav class="hidden lg:flex items-center gap-5 xl:gap-7 text-xs xl:text-sm font-medium tracking-wide uppercase text-ivory/80 flex-1 justify-center">
+      <a href="index.html#overview" class="hover:text-gold transition whitespace-nowrap">Overview</a>
+      <a href="index.html#gallery" class="hover:text-gold transition whitespace-nowrap">Gallery</a>
+      <a href="index.html#floorplans" class="hover:text-gold transition whitespace-nowrap">Floor Plans</a>
+      <a href="index.html#masterplan" class="hover:text-gold transition whitespace-nowrap">Master Plan</a>
+      <a href="index.html#amenities" class="hover:text-gold transition whitespace-nowrap">Amenities</a>
+      <a href="index.html#location" class="hover:text-gold transition whitespace-nowrap">Location</a>
+      <a href="reviews.html" class="hover:text-gold transition whitespace-nowrap">Reviews</a>
+      <a href="pricing.html" class="hover:text-gold transition whitespace-nowrap text-gold">Pricing</a>
+      <a href="index.html#faq" class="hover:text-gold transition whitespace-nowrap">FAQs</a>
+    </nav>
+    <div class="hidden lg:flex items-center shrink-0">
+      <button class="js-open-modal bg-gold text-onyx text-sm font-bold px-5 py-2.5 rounded-full hover:bg-ivory transition whitespace-nowrap" data-source="Pricing Page Header - Book Site Visit">Call Now</button>
     </div>
-  </header>
+    <button id="mobileMenuBtn" class="lg:hidden text-ivory p-2" aria-label="Open menu" aria-expanded="false">
+      <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
+    </button>
+  </div>
+  <div id="mobileMenu" class="hidden lg:hidden bg-onyx/98 backdrop-blur border-t border-gold/15">
+    <nav class="flex flex-col px-5 py-4 text-sm font-medium uppercase tracking-wide text-ivory/80">
+      <a href="index.html#overview" class="py-3 border-b border-ivory/10">Overview</a>
+      <a href="index.html#dualcore" class="py-3 border-b border-ivory/10">Design</a>
+      <a href="index.html#gallery" class="py-3 border-b border-ivory/10">Gallery</a>
+      <a href="index.html#floorplans" class="py-3 border-b border-ivory/10">Floor Plans</a>
+      <a href="index.html#masterplan" class="py-3 border-b border-ivory/10">Master Plan</a>
+      <a href="index.html#amenities" class="py-3 border-b border-ivory/10">Amenities</a>
+      <a href="reviews.html" class="py-3 border-b border-ivory/10">Reviews</a>
+      <a href="index.html#location" class="py-3 border-b border-ivory/10">Location</a>
+      <a href="pricing.html" class="py-3 border-b border-ivory/10">Pricing</a>
+      <a href="index.html#faq" class="py-3">FAQs</a>
+    </nav>
+  </div>
+</header>
 
   <div class="max-w-5xl mx-auto px-5 md:px-10 py-16 md:py-24">
     <a href="index.html" class="text-gold font-semibold text-sm">← Back to home</a>
@@ -105,10 +147,33 @@
     </div>
   </div>
 
-  <footer class="bg-onyx text-ivory/50 py-8 border-t border-gold/10 text-center text-xs">
+  <footer class="bg-onyx text-ivory/50 py-8 pb-20 md:pb-8 border-t border-gold/10 text-center text-xs">
     <p>RERA PBRERA-SAS79-PR0777 · <a href="privacy-policy.html" class="hover:text-gold">Privacy Policy</a> · <a href="terms.html" class="hover:text-gold">Terms &amp; Conditions</a></p>
     <p class="mt-2 text-ivory/30">This is an independent marketing website run by an authorised channel partner and is not affiliated with or an official website of the project developer.</p>
   </footer>
 
+<!-- Lead Capture Modal -->
+<div id="leadModal" class="fixed inset-0 z-50 hidden items-center justify-center bg-onyx/80 p-5">
+  <div class="bg-ivory text-onyx rounded-2xl p-8 max-w-sm w-full relative">
+    <button class="js-close-modal absolute top-4 right-4 text-onyx/50 hover:text-onyx" aria-label="Close">✕</button>
+    <h3 class="font-display text-2xl mb-2">Get the details</h3>
+    <p class="text-sm text-onyx/60 mb-6">Share your name and number and our team will get in touch with you.</p>
+    <form id="modalForm" class="flex flex-col gap-3">
+      <input required name="name" type="text" placeholder="Your Name" class="rounded-xl px-4 py-3 border border-onyx/15 focus:ring-2 focus:ring-gold outline-none">
+      <input required name="phone" type="tel" inputmode="numeric" autocomplete="tel" placeholder="Mobile Number" class="rounded-xl px-4 py-3 border border-onyx/15 focus:ring-2 focus:ring-gold outline-none">
+      <button type="submit" class="bg-onyx text-ivory font-bold py-3 rounded-xl hover:bg-brass transition">Continue</button>
+      <p id="modalStatus" class="text-xs text-clay text-center min-h-[1rem]"></p>
+    </form>
+    <div id="modalSuccess" class="hidden flex-col items-center gap-3 py-4 text-center">
+      <div class="w-14 h-14 rounded-full bg-onyx flex items-center justify-center">
+        <svg class="w-7 h-7 text-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg>
+      </div>
+      <h3 class="font-display text-2xl text-onyx">Thank you!</h3>
+      <p class="text-onyx/60 text-sm">We've received your details — our team will call you shortly.</p>
+    </div>
+  </div>
+</div>
+
+<script src="script.js"></script>
 </body>
 </html>

@@ -186,6 +186,7 @@ document.addEventListener("DOMContentLoaded", () => {
   // Header background on scroll (transparent over hero, solid after)
   const header = document.getElementById("siteHeader");
   const toggleHeader = () => {
+    if (!header) return;
     if (window.scrollY > 60) header.classList.add("scrolled");
     else header.classList.remove("scrolled");
   };
@@ -214,7 +215,7 @@ document.addEventListener("DOMContentLoaded", () => {
   document.querySelectorAll(".js-close-modal").forEach(btn => {
     btn.addEventListener("click", () => closeModal(false));
   });
-  document.getElementById("leadModal").addEventListener("click", (e) => {
+  document.getElementById("leadModal")?.addEventListener("click", (e) => {
     if (e.target.id === "leadModal") closeModal(false);
   });
 
@@ -230,7 +231,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const modalForm = document.getElementById("modalForm");
   const modalSuccess = document.getElementById("modalSuccess");
   const modalStatus = document.getElementById("modalStatus");
-  modalForm.addEventListener("submit", async (e) => {
+  modalForm?.addEventListener("submit", async (e) => {
     e.preventDefault();
     const formData = new FormData(modalForm);
     const phone = sanitizePhone(formData.get("phone"));
@@ -263,7 +264,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const enquiryForm = document.getElementById("enquiryForm");
   const enquirySuccess = document.getElementById("enquirySuccess");
   const formStatus = document.getElementById("formStatus");
-  enquiryForm.addEventListener("submit", async (e) => {
+  enquiryForm?.addEventListener("submit", async (e) => {
     e.preventDefault();
     const formData = new FormData(enquiryForm);
     const phone = sanitizePhone(formData.get("phone"));
