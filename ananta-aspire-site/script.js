@@ -57,11 +57,16 @@ function buildFaq() {
 // ===== Modal handling =====
 let modalOpenedViaHistory = false;
 
-function openModal(source) {
+function openModal(source, callNumber) {
   const modal = document.getElementById("leadModal");
   modal.classList.remove("hidden");
   modal.classList.add("flex");
   modal.dataset.source = source || "Unknown";
+  if (callNumber) {
+    modal.dataset.callAfter = callNumber;
+  } else {
+    delete modal.dataset.callAfter;
+  }
   history.pushState({ ananteModal: true }, "");
   modalOpenedViaHistory = true;
 }
@@ -209,7 +214,7 @@ document.addEventListener("DOMContentLoaded", () => {
   document.querySelectorAll(".js-open-modal").forEach(btn => {
     btn.addEventListener("click", (e) => {
       e.preventDefault();
-      openModal(btn.dataset.source);
+      openModal(btn.dataset.source, btn.dataset.call);
     });
   });
   document.querySelectorAll(".js-close-modal").forEach(btn => {
@@ -246,7 +251,11 @@ document.addEventListener("DOMContentLoaded", () => {
     );
     if (ok) {
       sessionStorage.setItem("leadCaptured", "true");
-      modalForm.classList.add("hidden");
+      const callAfter = document.getElementById("leadModal").dataset.callAfter;
+    if (callAfter) {
+      window.location.href = "tel:" + callAfter;
+    }
+    modalForm.classList.add("hidden");
       modalSuccess.classList.remove("hidden");
       modalSuccess.classList.add("flex");
       setTimeout(() => {
