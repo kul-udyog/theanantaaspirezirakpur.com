@@ -113,6 +113,11 @@ async function submitLead(data, statusEl) {
         timestamp: new Date().toISOString()
       })
     }).catch(() => {});
+    window.dataLayer = window.dataLayer || [];
+    window.dataLayer.push({
+      event: "generate_lead",
+      lead_source: data.source || "Unknown"
+    });
     statusEl.textContent = "";
     return true;
   } catch (err) {
