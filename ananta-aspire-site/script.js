@@ -175,6 +175,16 @@ function initWhatsAppButton() {
   document.body.appendChild(btn);
 }
 
+// ===== Autofill hints =====
+// Tells Chrome / Safari (Android + iPhone) which field is which, so saved name & number fill in reliably.
+function initAutofillHints() {
+  document.querySelectorAll('form input[name="name"]').forEach(el => el.setAttribute("autocomplete", "name"));
+  document.querySelectorAll('form input[name="phone"]').forEach(el => {
+    el.setAttribute("autocomplete", "tel");
+    el.setAttribute("inputmode", "tel");
+  });
+}
+
 // ===== Hero carousel =====
 function initHeroCarousel() {
   const slides = document.querySelectorAll(".hero-slide");
@@ -281,6 +291,7 @@ document.addEventListener("DOMContentLoaded", () => {
   initScrollReveal();
   initLightbox();
   initWhatsAppButton();
+  initAutofillHints();
 
   // Header background on scroll (transparent over hero, solid after)
   const header = document.getElementById("siteHeader");
