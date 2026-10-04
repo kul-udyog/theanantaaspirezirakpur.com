@@ -211,27 +211,66 @@ function initScrollReveal() {
 }
 
 // ===== Image lightbox =====
-function initLightbox() {
+// Opening an image adds a history entry, so the phone/browser Back button
+// just closes the image instead of taking the visitor off the page.
+let lightboxOpenedViaHistory = false;
+
+function isLightboxOpen() {
+  const lightbox = document.getElementById("imgLightbox");
+  return !!lightbox && lightbox.classList.contains("flex");
+}
+function openLightbox(img) {
   const lightbox = document.getElementById("imgLightbox");
   const lightboxImg = document.getElementById("lightboxImg");
+  lightboxImg.src = img.currentSrc || img.src;
+  lightboxImg.alt = img.alt;
+  lightbox.classList.remove("hidden");
+  lightbox.classList.add("flex");
+  if (!lightboxOpenedViaHistory) {
+    history.pushState({ ananteLightbox: true }, "");
+    lightboxOpenedViaHistory = true;
+  }
+}
+function closeLightbox(fromPopState) {
+  const lightbox = document.getElementById("imgLightbox");
   if (!lightbox) return;
-  document.querySelectorAll(".js-lightbox").forEach(img => {
-    img.addEventListener("click", () => {
-      lightboxImg.src = img.src;
-      lightboxImg.alt = img.alt;
-      lightbox.classList.remove("hidden");
-      lightbox.classList.add("flex");
-    });
+  lightbox.classList.add("hidden");
+  lightbox.classList.remove("flex");
+  if (!fromPopState && lightboxOpenedViaHistory) {
+    lightboxOpenedViaHistory = false;
+    history.back();
+  } else {
+    lightboxOpenedViaHistory = false;
+  }
+}
+
+function initLightbox() {
+  const images = document.querySelectorAll(".js-lightbox");
+  let lightbox = document.getElementById("imgLightbox");
+  if (!images.length && !lightbox) return;
+  // Pages like Floor Plans / Location have zoomable images but no viewer markup —
+  // create the same viewer the homepage uses so those images open too.
+  if (!lightbox) {
+    lightbox = document.createElement("div");
+    lightbox.id = "imgLightbox";
+    lightbox.className = "fixed inset-0 z-50 hidden items-center justify-center bg-onyx/95 p-4 md:p-10";
+    lightbox.innerHTML =
+      '<button class="js-close-lightbox absolute top-5 right-5 text-ivory/70 hover:text-gold text-2xl" aria-label="Close">✕</button>' +
+      '<img id="lightboxImg" src="" alt="" class="max-w-full max-h-full rounded-lg object-contain">';
+    document.body.appendChild(lightbox);
+  }
+  images.forEach(img => {
+    img.style.cursor = "zoom-in";
+    img.addEventListener("click", () => openLightbox(img));
   });
-  document.querySelector(".js-close-lightbox")?.addEventListener("click", () => {
-    lightbox.classList.add("hidden");
-    lightbox.classList.remove("flex");
+  document.querySelectorAll(".js-close-lightbox").forEach(btn => {
+    btn.addEventListener("click", () => closeLightbox(false));
   });
   lightbox.addEventListener("click", (e) => {
-    if (e.target === lightbox) {
-      lightbox.classList.add("hidden");
-      lightbox.classList.remove("flex");
-    }
+    if (e.target === lightbox) closeLightbox(false);
+  });
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape" && isLightboxOpen()) closeLightbox(false);
   });
 }
 
@@ -280,10 +319,13 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   // Back button closes the modal instead of navigating away from the page
+  // Back button closes the open image (lightbox) the same way
   window.addEventListener("popstate", () => {
     const modal = document.getElementById("leadModal");
     if (modal && modal.classList.contains("flex")) {
       closeModal(true);
+    } else if (isLightboxOpen()) {
+      closeLightbox(true);
     }
   });
 
