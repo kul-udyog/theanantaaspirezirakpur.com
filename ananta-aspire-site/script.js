@@ -1,6 +1,7 @@
 // ===== Config =====
 const LEAD_ENDPOINT = "https://script.google.com/macros/s/AKfycbzNC3OJcfzy2rOKHTqT0m3OGmWZ_R_OlMIv0X-ImnHhgk_4OnMsJ3Fzv6cnblgMjrM2-g/exec";
 const PROJECT_NAME = "The Ananta Aspire";
+const WHATSAPP_NUMBER = "919876557532"; // +91 98765 57532 (country code + number, no + or spaces)
 
 // ===== FAQ data =====
 const faqs = [
@@ -57,7 +58,7 @@ function buildFaq() {
 // ===== Modal handling =====
 let modalOpenedViaHistory = false;
 
-function openModal(source, callNumber) {
+function openModal(source, callNumber, whatsappAfter) {
   const modal = document.getElementById("leadModal");
   modal.classList.remove("hidden");
   modal.classList.add("flex");
@@ -66,6 +67,16 @@ function openModal(source, callNumber) {
     modal.dataset.callAfter = callNumber;
   } else {
     delete modal.dataset.callAfter;
+  }
+  // WhatsApp flow: same popup, but submit button says "Continue to WhatsApp"
+  const submitBtn = modal.querySelector('#modalForm button[type="submit"]');
+  if (submitBtn && !submitBtn.dataset.defaultText) submitBtn.dataset.defaultText = submitBtn.textContent;
+  if (whatsappAfter) {
+    modal.dataset.whatsappAfter = "true";
+    if (submitBtn) submitBtn.textContent = "Continue to WhatsApp";
+  } else {
+    delete modal.dataset.whatsappAfter;
+    if (submitBtn && submitBtn.dataset.defaultText) submitBtn.textContent = submitBtn.dataset.defaultText;
   }
   history.pushState({ ananteModal: true }, "");
   modalOpenedViaHistory = true;
@@ -124,6 +135,44 @@ async function submitLead(data, statusEl) {
     statusEl.textContent = "Something went wrong. Please try again.";
     return false;
   }
+}
+
+// ===== WhatsApp =====
+function openWhatsApp(name, phone) {
+  const msg = "Hi, I'm interested in The Ananta Aspire, Zirakpur." +
+    "\nName: " + (name || "") +
+    "\nPhone: " + (phone || "");
+  const url = "https://wa.me/" + WHATSAPP_NUMBER + "?text=" + encodeURIComponent(msg);
+  window.dataLayer = window.dataLayer || [];
+  window.dataLayer.push({ event: "whatsapp_open" });
+  // New tab keeps the website open; if the browser blocks it, open in the same tab
+  const win = window.open(url, "_blank");
+  if (!win) window.location.href = url;
+}
+
+// Floating WhatsApp button (added on every page that has the lead popup)
+function initWhatsAppButton() {
+  if (!document.getElementById("leadModal")) return;
+  const style = document.createElement("style");
+  style.textContent = `
+    .wa-float{position:fixed;right:18px;bottom:20px;z-index:45;width:58px;height:58px;border-radius:50%;
+      background:#25D366;color:#fff;border:0;cursor:pointer;display:flex;align-items:center;justify-content:center;
+      box-shadow:0 6px 20px rgba(0,0,0,.35);transition:transform .2s ease}
+    .wa-float:hover{transform:scale(1.08)}
+    .wa-float svg{width:32px;height:32px}
+    @media (max-width:767px){.wa-float{bottom:72px;right:14px;width:54px;height:54px}}
+  `;
+  document.head.appendChild(style);
+  const btn = document.createElement("button");
+  btn.type = "button";
+  btn.className = "wa-float";
+  btn.setAttribute("aria-label", "Chat on WhatsApp");
+  btn.innerHTML = '<svg viewBox="0 0 32 32" fill="currentColor" aria-hidden="true"><path d="M16.04 3C8.86 3 3.02 8.83 3.02 16.01c0 2.3.6 4.54 1.75 6.52L3 29l6.64-1.74a13 13 0 0 0 6.4 1.67h.01c7.18 0 13.02-5.84 13.02-13.02C29.07 8.83 23.22 3 16.04 3zm0 23.74h-.01a10.8 10.8 0 0 1-5.5-1.5l-.4-.24-3.94 1.03 1.05-3.84-.26-.4a10.77 10.77 0 0 1-1.65-5.78c0-5.96 4.85-10.81 10.82-10.81 5.96 0 10.81 4.85 10.81 10.82 0 5.96-4.86 10.72-10.82 10.72zm5.93-8.08c-.32-.16-1.92-.95-2.22-1.06-.3-.11-.51-.16-.73.16-.22.32-.84 1.06-1.03 1.28-.19.22-.38.24-.7.08-.32-.16-1.37-.5-2.6-1.6-.96-.86-1.61-1.92-1.8-2.24-.19-.32-.02-.5.14-.66.15-.14.32-.38.49-.57.16-.19.21-.32.32-.54.11-.22.05-.4-.03-.57-.08-.16-.73-1.75-1-2.4-.26-.63-.53-.54-.73-.55h-.62c-.22 0-.57.08-.86.4-.3.32-1.13 1.1-1.13 2.69s1.16 3.12 1.32 3.34c.16.22 2.28 3.48 5.52 4.88.77.33 1.37.53 1.84.68.77.25 1.48.21 2.03.13.62-.09 1.92-.78 2.19-1.54.27-.76.27-1.41.19-1.54-.08-.14-.3-.22-.62-.38z"/></svg>';
+  btn.addEventListener("click", (e) => {
+    e.preventDefault();
+    openModal("WhatsApp Button", null, true);
+  });
+  document.body.appendChild(btn);
 }
 
 // ===== Hero carousel =====
@@ -192,6 +241,7 @@ document.addEventListener("DOMContentLoaded", () => {
   initHeroCarousel();
   initScrollReveal();
   initLightbox();
+  initWhatsAppButton();
 
   // Header background on scroll (transparent over hero, solid after)
   const header = document.getElementById("siteHeader");
@@ -256,11 +306,14 @@ document.addEventListener("DOMContentLoaded", () => {
     );
     if (ok) {
       sessionStorage.setItem("leadCaptured", "true");
-      const callAfter = document.getElementById("leadModal").dataset.callAfter;
-    if (callAfter) {
-      window.location.href = "tel:" + callAfter;
-    }
-    modalForm.classList.add("hidden");
+      const leadModal = document.getElementById("leadModal");
+      const callAfter = leadModal.dataset.callAfter;
+      if (leadModal.dataset.whatsappAfter) {
+        openWhatsApp(formData.get("name"), phone);
+      } else if (callAfter) {
+        window.location.href = "tel:" + callAfter;
+      }
+      modalForm.classList.add("hidden");
       modalSuccess.classList.remove("hidden");
       modalSuccess.classList.add("flex");
       setTimeout(() => {
