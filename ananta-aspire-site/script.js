@@ -380,6 +380,40 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 
+  // Extra inline lead forms (e.g. hero form) — any <form class="js-lead-form" data-source="...">
+  document.querySelectorAll("form.js-lead-form").forEach(form => {
+    const box = form.closest(".js-lead-box") || form.parentElement;
+    const status = box.querySelector(".js-lead-status");
+    const success = box.querySelector(".js-lead-success");
+    form.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      const formData = new FormData(form);
+      const phone = sanitizePhone(formData.get("phone"));
+      if (!isValidPhone(phone)) {
+        status.textContent = "Please enter a valid 10-digit mobile number.";
+        return;
+      }
+      const ok = await submitLead(
+        {
+          name: formData.get("name"),
+          phone,
+          configuration: formData.get("configuration") || "",
+          source: form.dataset.source || "Inline Form"
+        },
+        status
+      );
+      if (ok) {
+        sessionStorage.setItem("leadCaptured", "true");
+        form.classList.add("hidden");
+        if (success) {
+          success.classList.remove("hidden");
+          success.classList.add("flex");
+        }
+        form.reset();
+      }
+    });
+  });
+
   // Main enquiry form submit
   const enquiryForm = document.getElementById("enquiryForm");
   const enquirySuccess = document.getElementById("enquirySuccess");
