@@ -129,17 +129,17 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           <tr>
             <td class="py-4 px-5 font-semibold text-ivory">3 BHK</td>
             <td class="py-4 px-5 font-mono-data text-ivory/70">1,843 sq.ft.</td>
-            <td class="py-4 px-5 font-mono-data text-gold">On request</td>
+            <td class="py-4 px-5"><button type="button" class="js-open-modal bg-gold text-onyx text-sm font-bold px-5 py-2.5 rounded-full hover:bg-ivory transition whitespace-nowrap" data-source="Pricing Table - 3 BHK">Get Price</button></td>
           </tr>
           <tr>
             <td class="py-4 px-5 font-semibold text-ivory">3 BHK + Study / Attendant Room</td>
             <td class="py-4 px-5 font-mono-data text-ivory/70">2,247 sq.ft.</td>
-            <td class="py-4 px-5 font-mono-data text-gold">On request</td>
+            <td class="py-4 px-5"><button type="button" class="js-open-modal bg-gold text-onyx text-sm font-bold px-5 py-2.5 rounded-full hover:bg-ivory transition whitespace-nowrap" data-source="Pricing Table - 3+1 BHK">Get Price</button></td>
           </tr>
           <tr>
             <td class="py-4 px-5 font-semibold text-ivory">4 BHK + Study / Attendant Room</td>
             <td class="py-4 px-5 font-mono-data text-ivory/70">2,945.45 sq.ft.</td>
-            <td class="py-4 px-5 font-mono-data text-gold">On request</td>
+            <td class="py-4 px-5"><button type="button" class="js-open-modal bg-gold text-onyx text-sm font-bold px-5 py-2.5 rounded-full hover:bg-ivory transition whitespace-nowrap" data-source="Pricing Table - 4+1 BHK">Get Price</button></td>
           </tr>
         </tbody>
       </table>
@@ -163,7 +163,25 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <div class="bg-gradient-to-br from-charcoal to-onyx border border-gold/20 rounded-3xl p-8 md:p-12 text-center">
       <h2 class="font-display text-2xl md:text-3xl mb-3 text-ivory">Get today's price for your preferred configuration</h2>
       <p class="text-ivory/60 mb-8 max-w-md mx-auto">Share your number and our team will call back with current rates, floor availability and payment plans.</p>
-      <a href="/#enquiry" class="inline-block bg-gold text-onyx font-bold px-8 py-3.5 rounded-full hover:bg-ivory transition">Request Callback</a>
+      <form id="enquiryForm" class="flex flex-col gap-4 max-w-sm mx-auto text-left">
+        <input required name="name" type="text" placeholder="Your Name" class="rounded-xl px-4 py-3.5 bg-ivory text-onyx border-0 focus:ring-2 focus:ring-gold outline-none">
+        <input required name="phone" type="tel" inputmode="numeric" autocomplete="tel" placeholder="Mobile Number" class="rounded-xl px-4 py-3.5 bg-ivory text-onyx border-0 focus:ring-2 focus:ring-gold outline-none">
+        <select name="configuration" class="rounded-xl px-4 py-3.5 bg-ivory text-onyx border-0 focus:ring-2 focus:ring-gold outline-none">
+          <option value="">Interested Configuration</option>
+          <option value="3 BHK">3 BHK</option>
+          <option value="3+1 BHK">3 BHK + Study</option>
+          <option value="4+1 BHK">4 BHK + Study</option>
+        </select>
+        <button type="submit" class="bg-gold text-onyx font-bold py-3.5 rounded-xl hover:bg-ivory transition">Get Price on Call</button>
+        <p id="formStatus" class="text-xs text-clay text-center min-h-[1rem]"></p>
+      </form>
+      <div id="enquirySuccess" class="hidden max-w-sm mx-auto flex-col items-center gap-3 py-6">
+        <div class="w-14 h-14 rounded-full bg-gold flex items-center justify-center">
+          <svg class="w-7 h-7 text-onyx" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg>
+        </div>
+        <h3 class="font-display text-2xl text-ivory">Thank you!</h3>
+        <p class="text-ivory/60 text-sm">We've received your details — our team will call you shortly.</p>
+      </div>
     </div>
   </div>
 
