@@ -41,6 +41,17 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="tailwind.css">
 <link rel="stylesheet" href="styles.css">
+<style>
+  /* Hero lead form: mobile = text, form, buttons/stats; desktop = text left, form right */
+  .hero-grid{display:grid;row-gap:2rem;grid-template-columns:minmax(0,1fr);grid-template-areas:"intro" "form" "extras"}
+  .hero-intro{grid-area:intro}.hero-form{grid-area:form}.hero-extras{grid-area:extras}
+  .hero-form-card{width:100%;max-width:26rem;padding:1.75rem}
+  .hero-form-card input{width:100%}
+  @media (min-width:1024px){
+    .hero-grid{grid-template-columns:minmax(0,1fr) 24rem;column-gap:4rem;grid-template-areas:"intro form" "extras form";align-items:end}
+    .hero-form{align-self:center}
+  }
+</style>
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -347,12 +358,38 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <div class="absolute inset-0 bg-gradient-to-t from-onyx via-onyx/70 to-onyx/20"></div>
     <div class="absolute inset-0 bg-gradient-to-r from-onyx/85 via-onyx/25 to-transparent"></div>
   </div>
-  <div class="relative z-10 max-w-7xl mx-auto px-5 md:px-10 pb-16 md:pb-24 pt-20 md:pt-32 w-full">
+  <div class="relative z-10 max-w-7xl mx-auto px-5 md:px-10 pb-16 md:pb-24 pt-20 md:pt-32 w-full hero-grid">
+    <div class="hero-intro">
     <p class="uppercase tracking-[0.25em] text-gold text-xs md:text-sm font-semibold mb-5 flex items-center gap-3">
       <span class="w-8 h-px bg-gold/60"></span>NH-7 · Chandigarh-Patiala Highway · Zirakpur
     </p>
     <h1 class="font-display text-4xl md:text-6xl lg:text-7xl leading-[1.05] text-ivory mb-6 max-w-3xl">A resort address in Zirakpur, <span class="italic text-gold">two homes</span> to a floor.</h1>
-    <p class="text-base md:text-lg text-ivory/75 max-w-xl mb-10 leading-relaxed">The Ananta Aspire — Mivan-built 3, 3+1 and 4+1 BHK smart apartments across 34,050 sq. yd., with a resort-style clubhouse, 15 minutes from Chandigarh Airport.</p>
+    <p class="text-base md:text-lg text-ivory/75 max-w-xl leading-relaxed">The Ananta Aspire — Mivan-built 3, 3+1 and 4+1 BHK smart apartments across 34,050 sq. yd., with a resort-style clubhouse, 15 minutes from Chandigarh Airport.</p>
+    </div>
+
+    <!-- Hero lead form -->
+    <div class="hero-form">
+      <div class="hero-form-card bg-ivory text-onyx rounded-2xl shadow-xl js-lead-box">
+        <h2 class="font-display text-2xl mb-2">Get Callback &amp; Price Details</h2>
+        <p class="text-sm text-onyx/60 mb-6">Share your name and number for current prices, floor plans and site-visit slots.</p>
+        <form id="heroForm" class="flex flex-col gap-3 js-lead-form" data-source="Hero Form">
+          <input required name="name" type="text" autocomplete="name" placeholder="Your Name" class="rounded-xl px-4 py-3 border border-onyx/15 focus:ring-2 focus:ring-gold outline-none">
+          <input required name="phone" type="tel" inputmode="tel" autocomplete="tel" placeholder="Mobile Number" class="rounded-xl px-4 py-3 border border-onyx/15 focus:ring-2 focus:ring-gold outline-none">
+          <button type="submit" class="bg-gold text-onyx font-bold py-3.5 rounded-xl hover:bg-ivory transition">Request Callback</button>
+          <p class="js-lead-status text-xs text-clay text-center min-h-[1rem]"></p>
+          <p class="text-xs text-onyx/60 text-center">Your number is only used to share pricing and site-visit details.</p>
+        </form>
+        <div class="js-lead-success hidden flex-col items-center gap-3 py-4 text-center">
+          <div class="w-14 h-14 rounded-full bg-onyx flex items-center justify-center">
+            <svg class="w-7 h-7 text-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg>
+          </div>
+          <h3 class="font-display text-2xl text-onyx">Thank you!</h3>
+          <p class="text-onyx/60 text-sm">We've received your details — our team will call you shortly.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="hero-extras">
     <div class="flex flex-wrap gap-4 mb-14">
       <button class="js-open-modal bg-gold text-onyx font-bold px-7 py-3.5 rounded-full hover:bg-ivory transition" data-source="Hero - Schedule Visit">Schedule a Visit</button>
       <a href="#floorplans" class="border border-ivory/30 text-ivory font-semibold px-7 py-3.5 rounded-full hover:border-gold hover:text-gold transition">View Floor Plans</a>
@@ -361,6 +398,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <div><p class="text-2xl md:text-3xl font-bold text-gold">440</p><p class="text-xs uppercase tracking-wide text-ivory/60">Apartments</p></div>
       <div><p class="text-2xl md:text-3xl font-bold text-gold">34,050</p><p class="text-xs uppercase tracking-wide text-ivory/60">Sq. Yd. Site</p></div>
       <div><p class="text-2xl md:text-3xl font-bold text-gold">2/Floor</p><p class="text-xs uppercase tracking-wide text-ivory/60">Per Block</p></div>
+    </div>
     </div>
   </div>
   <div class="hero-dots absolute bottom-6 right-6 md:right-10 z-10 flex gap-2">
