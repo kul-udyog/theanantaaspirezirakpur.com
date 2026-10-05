@@ -86,17 +86,38 @@ function openModal(source, callNumber, whatsappAfter) {
   if (firstField) {
     try { firstField.focus({ preventScroll: true }); } catch (e) { firstField.focus(); }
   }
+  fitModalToScreen();
 }
 function closeModal(fromPopState) {
   const modal = document.getElementById("leadModal");
   modal.classList.add("hidden");
   modal.classList.remove("flex");
+  fitModalToScreen();
   if (!fromPopState && modalOpenedViaHistory) {
     modalOpenedViaHistory = false;
     history.back();
   } else {
     modalOpenedViaHistory = false;
   }
+}
+
+// ===== Keep popup above the phone keyboard =====
+// Phones overlay the keyboard on top of the page, so a centred popup gets hidden behind it.
+// Shrink the popup's area to the visible part of the screen and pin the form to the top.
+function fitModalToScreen() {
+  const modal = document.getElementById("leadModal");
+  if (!modal) return;
+  const vv = window.visualViewport;
+  if (!modal.classList.contains("flex") || !vv) {
+    modal.style.top = modal.style.height = modal.style.bottom = modal.style.alignItems = modal.style.overflowY = "";
+    return;
+  }
+  const keyboardOpen = vv.height < window.innerHeight * 0.85;
+  modal.style.top = vv.offsetTop + "px";
+  modal.style.height = vv.height + "px";
+  modal.style.bottom = "auto";
+  modal.style.overflowY = "auto";
+  modal.style.alignItems = keyboardOpen ? "flex-start" : "";
 }
 
 // ===== Phone helpers =====
@@ -336,6 +357,18 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   // Back button closes the modal instead of navigating away from the page
+  // Re-fit the popup whenever the keyboard opens/closes or the screen scrolls
+  if (window.visualViewport) {
+    window.visualViewport.addEventListener("resize", fitModalToScreen);
+    window.visualViewport.addEventListener("scroll", fitModalToScreen);
+  }
+  // When moving between fields, keep the active field in view above the keyboard
+  document.getElementById("leadModal")?.addEventListener("focusin", (e) => {
+    if (e.target.matches("input, select")) {
+      setTimeout(() => e.target.scrollIntoView({ block: "nearest" }), 300);
+    }
+  });
+
   // Back button closes the open image (lightbox) the same way
   window.addEventListener("popstate", () => {
     const modal = document.getElementById("leadModal");
