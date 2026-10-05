@@ -80,6 +80,12 @@ function openModal(source, callNumber, whatsappAfter) {
   }
   history.pushState({ ananteModal: true }, "");
   modalOpenedViaHistory = true;
+  // Put the cursor in the Name field so the phone keyboard opens straight away.
+  // Must run right here (same tap, no delay) — iPhone only opens the keyboard on a direct tap.
+  const firstField = modal.querySelector('#modalForm input[name="name"]');
+  if (firstField) {
+    try { firstField.focus({ preventScroll: true }); } catch (e) { firstField.focus(); }
+  }
 }
 function closeModal(fromPopState) {
   const modal = document.getElementById("leadModal");
