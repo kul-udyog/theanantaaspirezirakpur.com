@@ -1,7 +1,8 @@
 // ===== Config =====
 const LEAD_ENDPOINT = "https://script.google.com/macros/s/AKfycbzNC3OJcfzy2rOKHTqT0m3OGmWZ_R_OlMIv0X-ImnHhgk_4OnMsJ3Fzv6cnblgMjrM2-g/exec";
 const PROJECT_NAME = "The Ananta Aspire";
-const WHATSAPP_NUMBER = "919876557532"; // +91 98765 57532 (country code + number, no + or spaces)
+const WHATSAPP_NUMBER = "919876557532";
+const CALL_NUMBER = "+919876557532"; // dialer opens with this number after a "Call Now" lead // +91 98765 57532 (country code + number, no + or spaces)
 
 // ===== FAQ data =====
 const faqs = [
@@ -346,7 +347,9 @@ document.addEventListener("DOMContentLoaded", () => {
   document.querySelectorAll(".js-open-modal").forEach(btn => {
     btn.addEventListener("click", (e) => {
       e.preventDefault();
-      openModal(btn.dataset.source, btn.dataset.call);
+      // "Call Now" buttons: after the form, open the phone dialer
+      const isCallButton = /call now/i.test(btn.textContent);
+      openModal(btn.dataset.source, btn.dataset.call || (isCallButton ? CALL_NUMBER : undefined));
     });
   });
   document.querySelectorAll(".js-close-modal").forEach(btn => {
@@ -400,10 +403,11 @@ document.addEventListener("DOMContentLoaded", () => {
       sessionStorage.setItem("leadCaptured", "true");
       const leadModal = document.getElementById("leadModal");
       const callAfter = leadModal.dataset.callAfter;
-      if (leadModal.dataset.whatsappAfter) {
-        openWhatsApp(formData.get("name"), phone);
-      } else if (callAfter) {
+      if (callAfter && !leadModal.dataset.whatsappAfter) {
         window.location.href = "tel:" + callAfter;
+      } else {
+        // Every lead: open the visitor's WhatsApp with the message pre-filled
+        openWhatsApp(formData.get("name"), phone);
       }
       modalForm.classList.add("hidden");
       modalSuccess.classList.remove("hidden");
@@ -443,6 +447,7 @@ document.addEventListener("DOMContentLoaded", () => {
       );
       if (ok) {
         sessionStorage.setItem("leadCaptured", "true");
+        openWhatsApp(formData.get("name"), phone);
         form.classList.add("hidden");
         if (success) {
           success.classList.remove("hidden");
@@ -476,6 +481,7 @@ document.addEventListener("DOMContentLoaded", () => {
     );
     if (ok) {
       sessionStorage.setItem("leadCaptured", "true");
+      openWhatsApp(formData.get("name"), phone);
       enquiryForm.classList.add("hidden");
       enquirySuccess.classList.remove("hidden");
       enquirySuccess.classList.add("flex");
