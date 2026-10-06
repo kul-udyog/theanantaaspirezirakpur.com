@@ -40,12 +40,10 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <link rel="stylesheet" href="styles.css">
 <style>
   /* Top lead form: mobile = text then form; desktop = text left, form right */
-  .price-top{display:grid;row-gap:2rem;grid-template-columns:minmax(0,1fr);margin-bottom:3.5rem}
+  .price-top{display:flex;justify-content:center;margin-bottom:3.5rem}
+  .visually-hidden{position:absolute!important;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
   .price-form-card{width:100%;max-width:26rem;padding:1.75rem}
   .price-form-card input,.price-form-card select{width:100%}
-  @media (min-width:1024px){
-    .price-top{grid-template-columns:minmax(0,1fr) 24rem;column-gap:4rem;align-items:center}
-  }
   /* Price table: on phones each configuration becomes a card (no sideways scrolling) */
   @media (max-width:639px){
     .price-table thead{display:none}
@@ -130,17 +128,11 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   </div>
 </header>
 
-  <div class="max-w-5xl mx-auto px-5 md:px-10 py-16 md:py-24">
-    <a href="/" class="text-gold font-semibold text-sm">← Back to home</a>
+  <div class="max-w-5xl mx-auto px-5 md:px-10 pt-8 pb-16 md:pt-12 md:pb-24">
+    <!-- Page title kept for Google (SEO) but hidden from view -->
+    <h1 class="visually-hidden">Ananta Aspire Zirakpur Price List — 3, 3+1 &amp; 4+1 BHK</h1>
 
-    <div class="price-top mt-8">
-    <div>
-    <p class="eyebrow">Pricing</p>
-    <h1 class="font-display text-3xl md:text-5xl leading-tight mt-3 mb-6 text-ivory">Ananta Aspire Zirakpur — price list</h1>
-    <p class="text-ivory/70 leading-relaxed max-w-2xl mb-2">The Ananta Aspire offers 3, 3+1 and 4+1 BHK Mivan-built smart homes on NH-7, Zirakpur, starting from approximately <span class="text-gold font-semibold">₹1.76 Crore* onwards</span>.</p>
-    <p class="text-ivory/50 text-sm leading-relaxed max-w-2xl">*Indicative starting price only. Actual rates vary by tower, floor and current inventory, and change over time — please treat every figure on this page as a starting reference, not a quote, and confirm current pricing with our team before making any decision.</p>
-    </div>
-
+    <div class="price-top">
     <!-- Top lead form -->
     <div>
       <div class="price-form-card bg-ivory text-onyx rounded-2xl shadow-xl js-lead-box">
@@ -155,9 +147,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             <option value="3+1 BHK">3 BHK + Study</option>
             <option value="4+1 BHK">4 BHK + Study</option>
           </select>
-          <button type="submit" class="bg-gold text-onyx font-bold py-3.5 rounded-xl hover:bg-ivory transition">Get Price on Call</button>
+          <button type="submit" class="bg-gold text-onyx font-bold py-3.5 rounded-xl hover:bg-ivory transition">Get Price Details</button>
           <p class="js-lead-status text-xs text-clay text-center min-h-[1rem]"></p>
-          <p class="text-xs text-onyx/60 text-center">Your number is only used to share pricing and site-visit details.</p>
         </form>
         <div class="js-lead-success hidden flex-col items-center gap-3 py-4 text-center">
           <div class="w-14 h-14 rounded-full bg-onyx flex items-center justify-center">
