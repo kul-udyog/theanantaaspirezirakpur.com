@@ -213,6 +213,28 @@ function initAutofillHints() {
   });
 }
 
+// ===== Header name -> Home =====
+// On mobile, "The Ananta Aspire" in the top bar is plain text. Make the text itself a link to the
+// home page (only the text is tappable, so the menu button next to it keeps working).
+function initHeaderHomeLink() {
+  const title = document.querySelector("#siteHeader > div > span.pointer-events-none");
+  if (!title || title.querySelector("a")) return;
+  const link = document.createElement("a");
+  link.href = "/";
+  link.textContent = title.textContent.trim();
+  link.style.pointerEvents = "auto";
+  link.setAttribute("aria-label", "The Ananta Aspire - Home");
+  link.addEventListener("click", (e) => {
+    // Already on the home page: just scroll to the top
+    if (location.pathname === "/" || location.pathname === "/index.html") {
+      e.preventDefault();
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+  });
+  title.textContent = "";
+  title.appendChild(link);
+}
+
 // ===== Hero carousel =====
 function initHeroCarousel() {
   const slides = document.querySelectorAll(".hero-slide");
@@ -319,6 +341,7 @@ document.addEventListener("DOMContentLoaded", () => {
   initScrollReveal();
   initLightbox();
   initWhatsAppButton();
+  initHeaderHomeLink();
   initAutofillHints();
 
   // Header background on scroll (transparent over hero, solid after)
